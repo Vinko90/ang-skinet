@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinet", "src\SkinetApp\Skinet.csproj", "{7670A6DF-271C-4620-BA6C-AEEF62C61BD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinet.Web", "src\Skinet.Web\Skinet.Web.csproj", "{D79AFFDE-8407-41EE-B699-07F123D0556A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7670A6DF-271C-4620-BA6C-AEEF62C61BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7670A6DF-271C-4620-BA6C-AEEF62C61BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7670A6DF-271C-4620-BA6C-AEEF62C61BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7670A6DF-271C-4620-BA6C-AEEF62C61BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
