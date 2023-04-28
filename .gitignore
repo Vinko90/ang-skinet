@@ -235,3 +235,5 @@ _Pvt_Extensions
 .DS_Store
 
 .angular/
+
+skinet.db
