@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinet.Web", "src\Skinet.Web\Skinet.Web.csproj", "{D79AFFDE-8407-41EE-B699-07F123D0556A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinet.Core", "src\Skinet.Core\Skinet.Core.csproj", "{2A38A77A-96BA-4A3D-ABEF-407B75C77485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinet.Infrastructure", "src\Skinet.Infrastructure\Skinet.Infrastructure.csproj", "{C3A9255C-36EC-4CB3-ABDA-2DEDD35A9115}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D79AFFDE-8407-41EE-B699-07F123D0556A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A38A77A-96BA-4A3D-ABEF-407B75C77485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A38A77A-96BA-4A3D-ABEF-407B75C77485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A38A77A-96BA-4A3D-ABEF-407B75C77485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A38A77A-96BA-4A3D-ABEF-407B75C77485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A9255C-36EC-4CB3-ABDA-2DEDD35A9115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A9255C-36EC-4CB3-ABDA-2DEDD35A9115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A9255C-36EC-4CB3-ABDA-2DEDD35A9115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A9255C-36EC-4CB3-ABDA-2DEDD35A9115}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

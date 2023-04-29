@@ -1,15 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using Skinet.Web.Data;
+using Skinet.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
     
     services.AddControllersWithViews();
-    services.AddDbContext<StoreContext>(opt =>
-    {
-        opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-    });
+    services.AddPersistence(builder.Configuration); //DB
 }
 
 var app = builder.Build();

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Skinet.Web.Data;
-using Skinet.Web.Entities;
+using Skinet.Core.Entities;
+using Skinet.Infrastructure.Data;
 
 namespace Skinet.Web.Controllers;
 
