@@ -16,14 +16,26 @@ public class ProductsController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<IReadOnlyList<Product>> GetProducts()
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
     {
-        return await _repo.GetProductsAsync();
+        return Ok(await _repo.GetProductsAsync());
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Product>> GetProduct(int id)
     {
         return await _repo.GetProductByIdAsync(id);
+    }
+    
+    [HttpGet("brands")]
+    public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+    {
+        return Ok(await _repo.GetProductBrandsAsync());
+    }
+    
+    [HttpGet("types")]
+    public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+    {
+        return Ok(await _repo.GetProductTypesAsync());
     }
 }
