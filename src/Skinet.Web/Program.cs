@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
     
     services.AddControllersWithViews();
     services.AddPersistence(builder.Configuration); //DB
+    services.AddRepositories(); //Repos
 }
 
 var app = builder.Build();
@@ -25,6 +26,8 @@ var app = builder.Build();
         pattern: "{controller}/{action=Index}/{id?}");
 
     app.MapFallbackToFile("index.html");
+
+    app.MigrateDatabase();
 }
 
 app.Run();
