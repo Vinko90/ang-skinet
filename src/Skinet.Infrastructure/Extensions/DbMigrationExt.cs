@@ -10,10 +10,11 @@ public static class DbMigrationExt
     public static async void MigrateDatabase(this IHost webApp)
     {
         using var scope = webApp.Services.CreateScope();
-        await using var appContext = scope.ServiceProvider.GetRequiredService<StoreContext>();
+        await using var appDbContext = scope.ServiceProvider.GetRequiredService<StoreContext>();
         try
         {
-            await appContext.Database.MigrateAsync();
+            await appDbContext.Database.MigrateAsync();
+            await StoreContextSeed.SeedAsync(appDbContext);
         }
         catch (Exception ex)
         {

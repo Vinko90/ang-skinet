@@ -19,4 +19,23 @@
       <ProjectReference Include="..\Skinet.Core\Skinet.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Seeds\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Data\Seeds\brands.json" />
+      <Content Include="Data\Seeds\brands.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\Seeds\products.json" />
+      <Content Include="Data\Seeds\products.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\Seeds\types.json" />
+      <Content Include="Data\Seeds\types.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
