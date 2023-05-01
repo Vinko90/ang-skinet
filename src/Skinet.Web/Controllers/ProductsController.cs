@@ -4,6 +4,7 @@ using Skinet.Core.Entities;
 using Skinet.Core.Interfaces;
 using Skinet.Core.Specifications;
 using Skinet.Web.DTO;
+using Skinet.Web.Errors;
 
 namespace Skinet.Web.Controllers;
 
@@ -36,6 +37,8 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
         var prod = await _productsRepo.GetEntityWithSpec(new ProductsWithTypesAndBrandsSpec(id));

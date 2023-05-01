@@ -1,24 +1,28 @@
 using Skinet.Infrastructure.Extensions;
-using Skinet.Web.Helpers;
+using Skinet.Web.Extensions;
+using Skinet.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
-    
-    services.AddControllersWithViews();
-    services.AddAutoMapper(typeof(MappingProfiles));
-    
-    services.AddPersistence(builder.Configuration); //DB
-    services.AddRepositories(); //Repos
-}
 
+    services.AddApplicationServices();              //App services
+    services.AddPersistence(builder.Configuration); //DB
+    services.AddRepositories();                     //Repos
+}
 var app = builder.Build();
 {
-    // Configure the HTTP request pipeline.
+    app.UseMiddleware<ExceptionMiddleware>();
+    
+    app.UseStatusCodePagesWithReExecute("/errors/{0}");
+    
     if (!app.Environment.IsDevelopment())
     {
         app.UseHsts();
     }
+    
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
