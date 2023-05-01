@@ -1,10 +1,13 @@
 using Skinet.Infrastructure.Extensions;
+using Skinet.Web.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
     
     services.AddControllersWithViews();
+    services.AddAutoMapper(typeof(MappingProfiles));
+    
     services.AddPersistence(builder.Configuration); //DB
     services.AddRepositories(); //Repos
 }
