@@ -1,10 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Skinet.Core.DTO;
 using Skinet.Core.Entities;
 using Skinet.Core.Interfaces;
 using Skinet.Core.Specifications;
-using Skinet.Web.DTO;
 using Skinet.Web.Errors;
+using Skinet.Web.Helpers;
 
 namespace Skinet.Web.Controllers;
 
@@ -30,10 +31,17 @@ public class ProductsController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<List<ProductDto>>> GetProducts()
+    public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery] ProductParamsDto productParams)
     {
-        var prods = await _productsRepo.GetAsync(new ProductsWithTypesAndBrandsSpec());
-        return _mapper.Map<IReadOnlyList<Product>, List<ProductDto>>(prods);
+        var spec = new ProductsWithTypesAndBrandsSpec(productParams);
+        var countSpec = new ProductWithFiltersForCountSpec(productParams);
+
+        var totalItems = await _productsRepo.CountAsync(countSpec);
+        var products = await _productsRepo.GetAsync(spec);
+        
+        var data = _mapper.Map<IReadOnlyList<Product>, List<ProductDto>>(products);
+
+        return Ok(new Pagination<ProductDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
     }
 
     [HttpGet("{id:int}")]

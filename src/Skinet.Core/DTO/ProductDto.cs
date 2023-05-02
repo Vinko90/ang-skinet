@@ -1,4 +1,4 @@
-namespace Skinet.Web.DTO;
+namespace Skinet.Core.DTO;
 
 public class ProductDto
 {

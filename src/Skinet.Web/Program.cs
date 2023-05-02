@@ -26,6 +26,11 @@ var app = builder.Build();
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
+
+    app.UseCors("CorsPolicy");
+
+    app.UseAuthorization();
+    
     app.UseRouting();
     
     app.MapControllerRoute(

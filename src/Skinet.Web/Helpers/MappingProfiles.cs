@@ -1,6 +1,6 @@
 using AutoMapper;
+using Skinet.Core.DTO;
 using Skinet.Core.Entities;
-using Skinet.Web.DTO;
 
 namespace Skinet.Web.Helpers;
 

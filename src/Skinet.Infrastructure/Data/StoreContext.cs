@@ -21,5 +21,17 @@ public class StoreContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        if (Database.ProviderName != "Microsoft.EntityFrameworkCore.Sqlite") return;
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            var properties = entityType.ClrType.GetProperties()
+                .Where(p => p.PropertyType == typeof(decimal));
+
+            foreach (var prop in properties)
+            {
+                modelBuilder.Entity(entityType.Name).Property(prop.Name).HasConversion<double>();
+            }
+        }
     }
 }

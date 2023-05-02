@@ -12,4 +12,6 @@ public interface IGenericRepository<T> where T : BaseEntity //Limit repo only to
     Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec);
     
     Task<T> GetEntityWithSpec(ISpecification<T> spec);
+
+    Task<int> CountAsync(ISpecification<T> spec);
 }
