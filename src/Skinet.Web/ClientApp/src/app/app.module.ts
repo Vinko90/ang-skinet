@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {NgOptimizedImage} from "@angular/common";
+import {BaseurlInterceptorService} from "./shared/interceptors/baseurl-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import {NgOptimizedImage} from "@angular/common";
     ]),
     NgOptimizedImage
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseurlInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
