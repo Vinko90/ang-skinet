@@ -9,6 +9,7 @@ import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
 import {HomeModule} from "./home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AppRoutingModule} from "./app-routing.module";
     CoreModule,
     SharedModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule
   ],
   bootstrap: [AppComponent]
 })

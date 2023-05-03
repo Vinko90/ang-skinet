@@ -3,7 +3,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/com
 import {Observable} from "rxjs";
 
 @Injectable()
-export class BaseurlInterceptorService implements HttpInterceptor {
+export class BaseurlInterceptor implements HttpInterceptor {
   constructor(@Inject('BASE_URL') private baseUrl: string) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
