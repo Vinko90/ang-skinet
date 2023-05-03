@@ -7,7 +7,8 @@ import {NgOptimizedImage} from "@angular/common";
 import { AppComponent } from './app.component';
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
-import {ShopModule} from "./shop/shop.module";
+import {HomeModule} from "./home/home.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {ShopModule} from "./shop/shop.module";
     NgOptimizedImage,
     CoreModule,
     SharedModule,
-    ShopModule
+    HomeModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
