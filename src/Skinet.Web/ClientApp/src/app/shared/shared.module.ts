@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import {BaseurlInterceptorService} from "./interceptors/baseurl-interceptor.service";
+import { PagingHeaderComponent } from './paging-header/paging-header.component';
+import { PagerComponent } from './pager/pager.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PagingHeaderComponent,
+    PagerComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    PaginationModule.forRoot()
   ],
   providers: [
     {
@@ -15,6 +22,11 @@ import {BaseurlInterceptorService} from "./interceptors/baseurl-interceptor.serv
       useClass: BaseurlInterceptorService,
       multi: true
     }
+  ],
+  exports: [
+    PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent
   ]
 })
 export class SharedModule { }
