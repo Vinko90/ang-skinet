@@ -6,6 +6,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {BaseurlInterceptorService} from "./interceptors/baseurl-interceptor.service";
 import { PagingHeaderComponent } from './paging-header/paging-header.component';
 import { PagerComponent } from './pager/pager.component';
+import {ErrorInterceptor} from "./interceptors/error.interceptor";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,11 @@ import { PagerComponent } from './pager/pager.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BaseurlInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],
