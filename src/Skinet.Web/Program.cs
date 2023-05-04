@@ -6,9 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
 
-    services.AddApplicationServices();              //App services
-    services.AddPersistence(builder.Configuration); //DB
-    services.AddRepositories();                     //Repos
+    services.AddApplicationServices();                      //App services
+    services.AddPersistence(builder.Configuration);         //Store DB
+    services.AddIdentityPersistence(builder.Configuration); //Identity DB
+    services.AddRepositories();                             //Repos
 }
 var app = builder.Build();
 {
@@ -28,7 +29,8 @@ var app = builder.Build();
     app.UseStaticFiles();
 
     app.UseCors("CorsPolicy");
-
+    
+    app.UseAuthentication();
     app.UseAuthorization();
     
     app.UseRouting();
@@ -39,7 +41,7 @@ var app = builder.Build();
 
     app.MapFallbackToFile("index.html");
 
-    app.MigrateDatabase();
+    app.MigrateDatabases();     //Migrate Both DB's
 }
 
 app.Run();

@@ -45,5 +45,8 @@ public static class ApplicationServicesExtensions
                 policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
             });
         });
+        
+        services.AddAuthentication();
+        services.AddAuthorization();
     }
 }

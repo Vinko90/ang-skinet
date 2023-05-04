@@ -10,6 +10,7 @@ public static class PersistenceExt
 {
     public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
+        //Store DB
         services.AddDbContext<StoreContext>(opt =>
         {
             opt.UseSqlite(configuration.GetConnectionString("DefaultConnection"), 
