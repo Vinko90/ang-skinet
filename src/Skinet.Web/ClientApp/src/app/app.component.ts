@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   loadCurrentUser() {
     const token = localStorage.getItem('token');
-    if (token) this.accSrv.loadCurrentUser(token).subscribe();
+    this.accSrv.loadCurrentUser(token).subscribe();
   }
 
   loadBasket() {
