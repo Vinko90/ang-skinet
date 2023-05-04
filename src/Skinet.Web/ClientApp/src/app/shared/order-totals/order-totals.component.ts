@@ -1,0 +1,10 @@
+import { Component } from '@angular/core';
+import {BasketService} from "../../basket/basket.service";
+
+@Component({
+  selector: 'app-order-totals',
+  templateUrl: './order-totals.component.html'
+})
+export class OrderTotalsComponent {
+  constructor(public basketSrv: BasketService) { }
+}

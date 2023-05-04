@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@paralleldrive/cuid2"
+            ],
             "progress": false,
             "outputPath": "dist",
             "index": "src/index.html",

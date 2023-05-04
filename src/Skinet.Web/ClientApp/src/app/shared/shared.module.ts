@@ -9,11 +9,13 @@ import { PagerComponent } from './pager/pager.component';
 import {ErrorInterceptor} from "./interceptors/error.interceptor";
 import {LoadingInterceptor} from "./interceptors/loading.interceptor";
 import {CarouselModule} from "ngx-bootstrap/carousel";
+import { OrderTotalsComponent } from './order-totals/order-totals.component';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
-    PagerComponent
+    PagerComponent,
+    OrderTotalsComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import {CarouselModule} from "ngx-bootstrap/carousel";
     PaginationModule,
     PagingHeaderComponent,
     PagerComponent,
-    CarouselModule
+    CarouselModule,
+    OrderTotalsComponent
   ]
 })
 export class SharedModule { }
