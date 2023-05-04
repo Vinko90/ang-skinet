@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Skinet.Infrastructure.Data;
 
@@ -12,6 +13,13 @@ public class BuggyController : ControllerBase
     public BuggyController(StoreContext db)
     {
         _db = db;
+    }
+
+    [HttpGet("testauth")]
+    [Authorize]
+    public ActionResult<string> GetSecretText()
+    {
+        return "Secret Stuff..hehe";
     }
     
     [HttpGet("notfound")]

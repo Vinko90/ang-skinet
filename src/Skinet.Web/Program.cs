@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
 
-    services.AddApplicationServices();                      //App services
+    services.AddApplicationServices(builder.Configuration); //App services
     services.AddPersistence(builder.Configuration);         //Store DB
     services.AddIdentityPersistence(builder.Configuration); //Identity DB
     services.AddRepositories();                             //Repos
@@ -30,10 +30,10 @@ var app = builder.Build();
 
     app.UseCors("CorsPolicy");
     
+    app.UseRouting();
+    
     app.UseAuthentication();
     app.UseAuthorization();
-    
-    app.UseRouting();
     
     app.MapControllerRoute(
         name: "default",

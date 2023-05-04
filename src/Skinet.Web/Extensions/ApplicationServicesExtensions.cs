@@ -1,4 +1,7 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Skinet.Web.Errors;
 using Skinet.Web.Helpers;
 
@@ -6,7 +9,7 @@ namespace Skinet.Web.Extensions;
 
 public static class ApplicationServicesExtensions
 {
-    public static void AddApplicationServices(this IServiceCollection services)
+    public static void AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         //Controllers
         services.AddControllersWithViews();
@@ -46,7 +49,21 @@ public static class ApplicationServicesExtensions
             });
         });
         
-        services.AddAuthentication();
+        //Configure Auth
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"]!)),
+                    ValidIssuer = config["Token:Issuer"],
+                    ValidateAudience = false,
+                    ValidateIssuer = true
+                };
+            });
+        
+        
         services.AddAuthorization();
     }
 }

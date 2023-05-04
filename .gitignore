@@ -237,4 +237,8 @@ _Pvt_Extensions
 .angular/
 
 skinet.db
+skinet.db-shm
+skinet.db-wal
 skinet-identity.db
+skinet-identity.db-shm
+skinet-identity.db-wal
