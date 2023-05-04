@@ -10,5 +10,6 @@ public static class ReposExt
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IBasketRedisRepository, BasketRedisRepository>();
     }
 }
