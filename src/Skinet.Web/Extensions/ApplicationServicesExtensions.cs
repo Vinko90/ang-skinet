@@ -13,11 +13,7 @@ public static class ApplicationServicesExtensions
     {
         //Controllers
         services.AddControllersWithViews();
-        
-        //Swagger
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
-        
+
         //AutoMapper
         services.AddAutoMapper(typeof(MappingProfiles));
         

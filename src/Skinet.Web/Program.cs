@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddPersistence(builder.Configuration);         //Store DB
     services.AddIdentityPersistence(builder.Configuration); //Identity DB
     services.AddRepositories();                             //Repos
+    services.AddSwaggerDocumentation();
 }
 var app = builder.Build();
 {
@@ -21,9 +22,8 @@ var app = builder.Build();
     {
         app.UseHsts();
     }
-    
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
+    app.UseSwaggerDocumentation();
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
