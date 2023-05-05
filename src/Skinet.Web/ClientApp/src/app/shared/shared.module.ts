@@ -13,25 +13,39 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { TextInputComponent } from './text-input/text-input.component';
+import { StepperComponent } from './stepper/stepper.component';
+import {CdkStepperModule} from "@angular/cdk/stepper";
+import {JwtInterceptor} from "./interceptors/jwt.interceptor";
+import { BasketSummaryComponent } from './basket-summary/basket-summary.component';
+import {RouterLink} from "@angular/router";
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
     OrderTotalsComponent,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    BasketSummaryComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    CdkStepperModule,
+    RouterLink
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BaseurlInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true
     },
     {
@@ -53,7 +67,10 @@ import { TextInputComponent } from './text-input/text-input.component';
     BsDropdownModule,
     OrderTotalsComponent,
     ReactiveFormsModule,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    CdkStepperModule,
+    BasketSummaryComponent
   ]
 })
 export class SharedModule { }
