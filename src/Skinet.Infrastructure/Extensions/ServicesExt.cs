@@ -5,16 +5,17 @@ using Skinet.Infrastructure.Services;
 
 namespace Skinet.Infrastructure.Extensions;
 
-public static class ReposExt
+public static class ServicesExt
 {
-    public static void AddRepositories(this IServiceCollection services)
+    public static void AddRepositoriesAndServices(this IServiceCollection services)
     {
         //Repositories
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBasketRedisRepository, BasketRedisRepository>();
         
-        //TokenService
+        //Services
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IOrderService, OrderService>();
     }
 }

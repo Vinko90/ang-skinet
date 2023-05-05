@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddApplicationServices(builder.Configuration); //App services
     services.AddPersistence(builder.Configuration);         //Store DB
     services.AddIdentityPersistence(builder.Configuration); //Identity DB
-    services.AddRepositories();                             //Repos
-    services.AddSwaggerDocumentation();
+    services.AddRepositoriesAndServices();                  //Repos & Services
+    services.AddSwaggerDocumentation();                     //Swagger
 }
 var app = builder.Build();
 {

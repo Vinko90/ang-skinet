@@ -1,5 +1,7 @@
-services:
+version: "3.9"
 
+services:
+  # Add Redis
   redis:
     image: redis:latest
     ports:
@@ -7,7 +9,7 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis-data:/data
-
+  # Add Redis Commander
   redis-commander:
     image: rediscommander/redis-commander:latest
     environment:

@@ -43,6 +43,22 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return await ApplySpecification(spec).CountAsync();
     }
 
+    public void Add(T entity)
+    {
+        _db.Set<T>().Add(entity);
+    }
+
+    public void Update(T entity)
+    {
+        _db.Set<T>().Attach(entity);
+        _db.Entry(entity).State = EntityState.Modified;
+    }
+
+    public void Delete(T entity)
+    {
+        _db.Set<T>().Remove(entity);
+    }
+
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
         return SpecificationEvaluator<T>.GetQuery(_db.Set<T>().AsQueryable(), spec);
