@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Skinet.Core.Entities;
+using Skinet.Core.Entities.OrderAggregate;
 
 namespace Skinet.Infrastructure.Data;
 
@@ -16,6 +17,12 @@ public class StoreContext : DbContext
     public DbSet<ProductBrand> ProductBrands { get; set; }
     
     public DbSet<ProductType> ProductTypes { get; set; }
+    
+    public DbSet<Order> Orders { get; set; }
+    
+    public DbSet<OrderItem> OrderItems { get; set; }
+    
+    public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

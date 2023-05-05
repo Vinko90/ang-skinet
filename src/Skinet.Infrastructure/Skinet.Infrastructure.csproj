@@ -40,6 +40,10 @@
       <Content Include="Data\Seeds\types.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Data\Seeds\delivery.json" />
+      <Content Include="Data\Seeds\delivery.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>
