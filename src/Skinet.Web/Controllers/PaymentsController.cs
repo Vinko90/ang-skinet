@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Skinet.Core.Entities;
 using Skinet.Core.Interfaces;
+using Skinet.Web.Errors;
 
 namespace Skinet.Web.Controllers;
 
@@ -20,6 +21,9 @@ public class PaymentsController : ControllerBase
     [HttpPost("{basketId}")]
     public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
     {
-        return await _payService.CreateOrUpdatePaymentIntent(basketId);
+        var basket = await _payService.CreateOrUpdatePaymentIntent(basketId);
+
+        if (basket == null) return BadRequest(new ApiResponse(400, "Problem with your basket!"));
+        return basket;
     }
 }

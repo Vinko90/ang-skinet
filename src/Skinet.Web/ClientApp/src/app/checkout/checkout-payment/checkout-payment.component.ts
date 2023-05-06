@@ -14,6 +14,8 @@ import {
   StripeCardNumberElement
 } from "@stripe/stripe-js";
 import {environment} from "../../../environments/environment";
+import {firstValueFrom} from "rxjs";
+import {OrderToCreate} from "../../shared/models/orderToCreate.model";
 
 
 @Component({
@@ -30,6 +32,7 @@ export class CheckoutPaymentComponent implements OnInit {
   cardExpiry?: StripeCardExpiryElement;
   cardCvc?: StripeCardCvcElement;
   cardErrors: any;
+  loading = false;
 
   constructor(private basketSrv: BasketService,
               private checkoutSrv: CheckoutService,
@@ -65,39 +68,54 @@ export class CheckoutPaymentComponent implements OnInit {
     });
   }
 
-  submitOrder() {
+  async submitOrder() {
+    this.loading = true;
     const basket = this.basketSrv.getCurrentBasketValue();
-    if (!basket) return;
-    const orderToCreate = this.getOrderToCreate(basket);
-    if (!orderToCreate) return;
-    this.checkoutSrv.createOrder(orderToCreate).subscribe({
-      next: order => {
-        this.toastr.success('Order created successfully');
-        this.stripe?.confirmCardPayment(basket.clientSecret!, {
-          payment_method: {
-            card: this.cardNumber!,
-            billing_details: {
-              name: this.checkoutForm?.get('paymentForm')?.get('nameOnCard')?.value
-            }
-          }
-        }).then(result => {
-          console.log(result);
-          if (result.paymentIntent) {
-            this.basketSrv.deleteLocalBasket();
-            const navExtra: NavigationExtras = {state: order};
-            this.router.navigate(['checkout/success'], navExtra);
-          } else {
-            this.toastr.error(result.error.message);
-          }
-        });
+
+    try {
+      const createdOrder = await this.createOrder(basket);
+      const paymentResult = await this.confirmPaymentWithStripe(basket);
+
+      if (paymentResult.paymentIntent) {
+        this.basketSrv.deleteLocalBasket();
+        const navExtra: NavigationExtras = {state: createdOrder};
+        this.router.navigate(['checkout/success'], navExtra);
+      } else {
+        this.toastr.error(paymentResult.error.message);
       }
-    });
+
+    } catch (error: any) {
+      console.log(error);
+      this.toastr.error(error.message);
+    } finally {
+      this.loading = false;
+    }
   }
 
-  private getOrderToCreate(basket: Basket) {
+  private async createOrder(basket: Basket | null) {
+    if (!basket) throw new Error('createOrder() -> Basket is null');
+    const orderToCreate = this.getOrderToCreate(basket);
+    return firstValueFrom(this.checkoutSrv.createOrder(orderToCreate));
+  }
+
+  private async confirmPaymentWithStripe(basket: Basket | null) {
+    if (!basket) throw new Error('confirmPaymentWithStripe() -> Basket is null');
+    const result = this.stripe?.confirmCardPayment(basket.clientSecret!, {
+      payment_method: {
+        card: this.cardNumber!,
+        billing_details: {
+          name: this.checkoutForm?.get('paymentForm')?.get('nameOnCard')?.value
+        }
+      }
+    });
+    if (!result) throw new Error('confirmPaymentWithStripe() -> Problem attempting payment with stripe');
+    return result;
+  }
+
+  private getOrderToCreate(basket: Basket): OrderToCreate {
     const deliveryMethodId = this.checkoutForm?.get('deliveryForm')?.get('deliveryMethod')?.value;
     const shipToAddress = this.checkoutForm?.get('addressForm')?.value as Address;
-    if (!deliveryMethodId || !shipToAddress) return;
+    if (!deliveryMethodId || !shipToAddress) throw new Error('Problem in getOrderToCreate()');
     return {
       basketId: basket.id,
       deliveryMethodId: deliveryMethodId,

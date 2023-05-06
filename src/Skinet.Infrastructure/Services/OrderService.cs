@@ -36,20 +36,29 @@ public class OrderService : IOrderService
         
         //Calc subtotal
         var subtotal = items.Sum(item => item.Price * item.Quantity);
+        
+        //Check if order exist
+        var spec = new OrderByPaymentIntentIdSpec(basket.PaymentIntentId);
+        var order = await _uow.Repository<Order>().GetEntityWithSpec(spec);
 
-        //Create order
-        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
-
+        if (order != null)
+        {
+            order.ShipToAddress = shippingAddress;
+            order.DeliveryMethod = deliveryMethod;
+            order.Subtotal = subtotal;
+            _uow.Repository<Order>().Update(order);
+        }
+        else
+        {
+            //Create order
+            order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, basket.PaymentIntentId);
+            _uow.Repository<Order>().Add(order);
+        }
+        
         //Save to db
-        _uow.Repository<Order>().Add(order);
         var dbResult = await _uow.Complete();
-        if (dbResult <= 0) return null; //No Changes saved to db
         
-        //delete basket
-        await _basketRepo.DeleteBasketAsync(basketId);
-        
-        //return order
-        return order;
+        return dbResult <= 0 ? null : order;
     }
 
     public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
