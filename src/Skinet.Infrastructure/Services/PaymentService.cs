@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Skinet.Core.Entities;
 using Skinet.Core.Entities.OrderAggregate;
 using Skinet.Core.Interfaces;
+using Skinet.Core.Specifications;
 using Stripe;
 using Product = Skinet.Core.Entities.Product;
 
@@ -72,5 +73,27 @@ public class PaymentService : IPaymentService
 
         await _basketRepo.UpdateBasketAsync(basket);
         return basket;
+    }
+
+    public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
+    {
+        var spec = new OrderByPaymentIntentIdSpec(paymentIntentId);
+        var order = await _uow.Repository<Order>().GetEntityWithSpec(spec);
+        if (order == null) return null;
+
+        order.Status = OrderStatus.PaymentReceived;
+        await _uow.Complete();
+        return order;
+    }
+
+    public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+    {
+        var spec = new OrderByPaymentIntentIdSpec(paymentIntentId);
+        var order = await _uow.Repository<Order>().GetEntityWithSpec(spec);
+        if (order == null) return null;
+
+        order.Status = OrderStatus.PaymentFailed;
+        await _uow.Complete();
+        return order;
     }
 }

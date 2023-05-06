@@ -11,7 +11,8 @@ for API and Client code.
 {
   "StripeSettings": {
     "PubKey": "",
-    "SecKey": ""
+    "SecKey": "",
+    "WhKey": ""
   }
 }
 ````
