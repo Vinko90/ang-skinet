@@ -10,6 +10,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>Skinet.Web</RootNamespace>
+        <UserSecretsId>83cbec92-85e4-403d-b82e-99772382a82d</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
