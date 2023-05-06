@@ -10,7 +10,7 @@ import {ErrorInterceptor} from "./interceptors/error.interceptor";
 import {LoadingInterceptor} from "./interceptors/loading.interceptor";
 import {CarouselModule} from "ngx-bootstrap/carousel";
 import { OrderTotalsComponent } from './order-totals/order-totals.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { TextInputComponent } from './text-input/text-input.component';
 import { StepperComponent } from './stepper/stepper.component';
@@ -31,6 +31,7 @@ import {RouterLink} from "@angular/router";
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),

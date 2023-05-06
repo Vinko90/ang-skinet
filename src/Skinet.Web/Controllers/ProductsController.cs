@@ -31,6 +31,7 @@ public class ProductsController : ControllerBase
     }
     
     [HttpGet]
+    [Cached(60)]
     public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery] ProductParamsDto productParams)
     {
         var spec = new ProductsWithTypesAndBrandsSpec(productParams);
@@ -45,6 +46,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Cached(60)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
@@ -54,12 +56,14 @@ public class ProductsController : ControllerBase
     }
     
     [HttpGet("brands")]
+    [Cached(60)]
     public async Task<ActionResult<List<ProductBrand>>> GetProductBrands()
     {
         return Ok(await _prodBrandsRepo.GetAllAsync());
     }
     
     [HttpGet("types")]
+    [Cached(60)]
     public async Task<ActionResult<List<ProductType>>> GetProductTypes()
     {
         return Ok(await _prodTypeRepo.GetAllAsync());
