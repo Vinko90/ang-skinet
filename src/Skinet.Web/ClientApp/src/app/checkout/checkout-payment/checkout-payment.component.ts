@@ -13,6 +13,7 @@ import {
   StripeCardExpiryElement,
   StripeCardNumberElement
 } from "@stripe/stripe-js";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class CheckoutPaymentComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    loadStripe('dummy').then(stripe => {
+    loadStripe(environment.stripePubKey).then(stripe => {
       this.stripe = stripe;
       const elements = stripe?.elements();
       if (elements) {

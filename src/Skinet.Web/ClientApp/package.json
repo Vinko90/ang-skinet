@@ -7,7 +7,8 @@
     "start": "run-script-os",
     "start:windows": "ng serve --port 44422 --ssl --ssl-cert %APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem --ssl-key %APPDATA%\\ASP.NET\\https\\%npm_package_name%.key",
     "start:default": "ng serve --port 44422 --ssl --ssl-cert $HOME/.aspnet/https/${npm_package_name}.pem --ssl-key $HOME/.aspnet/https/${npm_package_name}.key",
-    "build": "ng build",
+    "config": "ts-node src/environments/set-env.ts",
+    "build": "npm run config && ng build",
     "build:ssr": "ng run Skinet:server:dev",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -27,6 +28,7 @@
     "@paralleldrive/cuid2": "^2.2.0",
     "@stripe/stripe-js": "^1.52.1",
     "bootswatch": "^5.2.3",
+    "dotenv": "^16.0.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "ngx-spinner": "^15.0.1",

@@ -12,11 +12,11 @@ const setEnv = () => {
 
   // ****** Development File ******
   const devEnvConfigFile = `export const environment = {
-      production: false,
-      stripePubKey: '${process.env.DEV_STRIPE_PUB_KEY}',
-    };`;
+    production: false,
+    stripePubKey: '${process.env.DEV_STRIPE_PUB_KEY}'
+  };`;
 
-  console.log('The dev file `environment.ts` will be written with the following content: \n');
+  console.log('The dev file `environment.ts` will be written with the following content: \n' + devEnvConfigFile);
   writeFile(devTargetPath, devEnvConfigFile, (err: any) => {
     if (err) {
       console.error(err);
@@ -29,11 +29,11 @@ const setEnv = () => {
 
   // ****** Production File ******
   const prodEnvConfigFile = `export const environment = {
-      production: true,
-      stripePubKey: '${process.env.PROD_STRIPE_PUB_KEY}',
-    };`;
+    production: true,
+    stripePubKey: '${process.env.PROD_STRIPE_PUB_KEY}'
+  };`;
 
-  console.log('The production file `environment.prod.ts` will be written with the following content: \n');
+  console.log('The production file `environment.prod.ts` will be written with the following content: \n' + prodEnvConfigFile);
   writeFile(prodTargetPath, prodEnvConfigFile, (err: any) => {
     if (err) {
       console.error(err);
