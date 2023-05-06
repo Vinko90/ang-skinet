@@ -13,7 +13,7 @@ public static class IdentityExt
     {
         services.AddDbContext<AppIdentityContext>(opt =>
         {
-            opt.UseSqlite(configuration.GetConnectionString("IdentityConnection"), 
+            opt.UseNpgsql(configuration.GetConnectionString("IdentityConnection")!, 
                 b =>
                 {
                     b.MigrationsAssembly(typeof(AppIdentityContext).Assembly.FullName);

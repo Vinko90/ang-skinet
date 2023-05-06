@@ -13,7 +13,7 @@ public static class PersistenceExt
         //Store DB
         services.AddDbContext<StoreContext>(opt =>
         {
-            opt.UseSqlite(configuration.GetConnectionString("DefaultConnection"), 
+            opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection")!, 
                 b =>
             {
                 b.MigrationsAssembly(typeof(StoreContext).Assembly.FullName);

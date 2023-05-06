@@ -4,6 +4,8 @@ services:
   # Add Redis
   redis:
     image: redis:latest
+    container_name: skinet-redis
+    restart: always
     ports:
       - 6379:6379
     command: ["redis-server", "--appendonly", "yes"]
@@ -12,14 +14,45 @@ services:
   # Add Redis Commander
   redis-commander:
     image: rediscommander/redis-commander:latest
+    container_name: skinet-redis-commander
+    restart: always
     environment:
       - REDIS_HOSTS=local:redis:6379
       - HTTP_USER=root
       - HTTP_PASSWORD=secret
     ports:
-      - 8081:8081
+      - "8081:8081"
     depends_on:
       - redis
-    
+  # Add Postgres
+  postgres:
+    image: postgres
+    container_name: skinet-postgres
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: appuser
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/data
+  # Add PgAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: skinet-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    links:
+      - "postgres:server"
+    depends_on: 
+      - postgres
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
 volumes:
   redis-data:
+  postgres-data:
+  pgadmin-data:
