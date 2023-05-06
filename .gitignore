@@ -242,3 +242,6 @@ skinet.db-wal
 skinet-identity.db
 skinet-identity.db-shm
 skinet-identity.db-wal
+
+src/Skinet.Web/ClientApp/src/environments/environment.*
+src/Skinet.Web/ClientApp/src/environments/.env
