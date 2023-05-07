@@ -8,6 +8,9 @@ public interface ISpecification<T>
     
     List<Expression<Func<T, object>>> Includes { get; }
     
+    //For ThenInclude operators
+    List<string> IncludeStrings {get;}
+    
     Expression<Func<T, object>> OrderBy { get; }
     
     Expression<Func<T, object>> OrderByDescending { get; }

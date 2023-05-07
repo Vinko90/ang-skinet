@@ -13,6 +13,8 @@ public class BaseSpecification<T> : ISpecification<T>
 
     public List<Expression<Func<T, object>>> Includes { get; } = new();
     
+    public List<string> IncludeStrings { get; } = new();
+    
     public Expression<Func<T, object>> OrderBy { get; private set; }
     
     public Expression<Func<T, object>> OrderByDescending { get; private set; }
@@ -26,6 +28,18 @@ public class BaseSpecification<T> : ISpecification<T>
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {
         Includes.Add(includeExpression);
+    }
+    
+    /// <summary>
+    /// Then finally in order to use this you would (in your specification) you would pass a string instead of the expression e.g:
+    /// AddInclude(c => c.CountryOfBirth);
+    /// AddInclude(“CountyOfOrigin.DefaultCountryLanguage”);
+    /// You can chain on as many ThenIncludes as you wish separating each one with a period.
+    /// Obviously you need to be careful with spelling as this is string based.
+    /// </summary>
+    protected void AddInclude(string includeString)
+    {
+        IncludeStrings.Add(includeString);
     }
 
     protected void AddOrderBy(Expression<Func<T, object>> orderByExp)
