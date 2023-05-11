@@ -11,7 +11,9 @@
     "build": "npm run config && ng build",
     "build:ssr": "ng run Skinet:server:dev",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc:build": "compodoc -p tsconfig.doc.json -d ./doc -n Skinet --theme postmark",
+    "compodoc:serve": "npm run compodoc:build && compodoc -s -d ./doc"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
     "@angular/platform-browser-dynamic": "^15.2.8",
     "@angular/platform-server": "^15.2.8",
     "@angular/router": "^15.2.8",
+    "@compodoc/compodoc": "^1.1.19",
     "@paralleldrive/cuid2": "^2.2.0",
     "@stripe/stripe-js": "^1.52.1",
     "bootswatch": "^5.2.3",
